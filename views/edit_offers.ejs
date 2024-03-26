@@ -1,0 +1,86 @@
+
+<%- include('header')%>
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Edit Offers Details</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <form action="/admin/offers/editOffersData/<%=singleData.id%>" method="post" class="form-horizontal">
+                               
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Icon</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="icon" id="text-input1" value="<%=singleData.icon%>" name="icon" placeholder="Enter Offer Title" class="form-control">
+                                       
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Title</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="text" id="text-input" value="<%=singleData.title%>" name="title" placeholder="Enter Offer Title" class="form-control">
+                                       
+                                    </div>
+                                </div>
+
+                                <% let country=['China','America','India']%>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="selectSm" class=" form-control-label">Select Country</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="country" id="SelectLm" class="form-control-sm form-control">
+                                            <option value="">select-country</option>
+                                            <% country.map((v,i)=>{%>
+                                                <option value="<%= v%>" <% if(singleData.country==v){%><%= 'selected'%><% }%>><%= v%></option>
+                                           <% })%>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <% let city=['Wuhan','Gujarat','NewYork','']%>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="selectSm" class=" form-control-label">Select City</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="city" id="SelectLm" class="form-control-sm form-control">
+                                            <option value="">select-city</option>
+                                            <% city.map((v,i)=>{%>
+                                                <option value="<%= v%>" <% if(singleData.city==v){%><%= 'selected'%><% }%>><%= v%></option>
+                                           <% })%>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                             
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="textarea-input" class=" form-control-label">Description</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <textarea name="description" id="textarea-input" rows="4" placeholder="Content..." class="form-control"><%=singleData.description%></textarea>
+                                    </div>
+                                </div>
+                                                       
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                           
+                    </div>
+                </div>
+            </div>
+        </form>
+            <%- include('footer')%>

@@ -1,0 +1,82 @@
+
+<%- include('header')%>
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <% if(locals.flash.success.length>0 && locals.flash.success){%>
+                        <div class="alert alert-success">
+                            <%= locals.flash.success%>
+                        </div>
+                        <% }%>
+                        <form>
+                            <input type="text" name="search" value="<%= search%>">
+                            <input type="submit" name="searching" class="btn btn-primary">
+                        </form>
+                    
+                        <form action="/admin/comments/multipleDeleteRecords" method="post">
+                            <div class="table-responsive table--no-card m-b-30">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>PostId</th>
+                                            <th>Name</th>
+                                            <th class="text-right">Email</th>
+                                            <th class="text-right">Message</th>
+                                            <th class="text-right">Image</th>
+                                            <th class="text-right">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% var no=currentPage*per_page; for(var add of commentRecord){%>
+                                            <tr>
+                                            <td><%= ++no%></td>
+                                            <td><%=add.postId%></td>
+                                            <td><%= add.name%></td>
+                                            <td><%= add.email%></td>
+                                            <td><%= add.message%></td>
+                                            <td><img src="<%= add.commentImage%>" width="100" height="100" alt=""></td>
+                                           
+                                            <% if(add.status){%>
+                                                <td><a href="/admin/comments/deactive/<%=add.id%>" class="btn btn-success">Active</a></td>
+                                            <%}else{%>
+                                                <td><a href="/admin/comments/active/<%=add.id%>" class="btn btn-danger">Deactive</a></td>
+                                            <%}%>
+
+
+                                        </tr>
+                                       <% }%>
+                                    </tbody>
+                                    <tr>
+                                        <td colspan="9">
+                                            <% for(var i=0;i<totalPage;){%>
+                                                <a href="/admin/comments/view_comments/?page=<%= i%>&search=<%= search%>" class="btn btn-primary"><%= ++i%></a>
+                                                <% }%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9">
+                                            <% if(currentPage!=0){%>
+                                                <a href="/admin/comments/view_comments/?page=<%= currentPage-1%>&search=<%= search%>" class="btn btn-info">Prev</a>
+                                            <% }%>
+                                                <a href="/admin/comments/view_comments/?page=<%= parseInt(currentPage)+1%>&search=<%= search%>" class="btn btn-info"><%= parseInt(currentPage)+1%></a>
+                                            <% var next=parseInt(currentPage)+1;if(next!=totalPage){%>
+                                                <a href="/admin/comments/view_comments/?page=<%= next%>&search=<%= search%>" class="btn btn-info">Next</a>
+                                            <% }%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+
+                </div>
+            </div>
+            <%- include('footer')%>
+            <script>
+                 $('#checkAll').click(function () {    
+                     $('input:checkbox').prop('checked', this.checked);    
+    });
+            </script>
